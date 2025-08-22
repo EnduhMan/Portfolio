@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EnduhMan | Roblox & Web Developer</title>
+  <meta name="description" content="Roblox scripter, builder, UI developer, project manager & web developer. Commission-friendly pricing, clean systems, polished builds, websites, and reliable delivery." />
+  <style>
+    :root{
+      --bg:#0b0e13; --panel:#11161e; --muted:#9aa3b2; --text:#e7edf5; 
+      --brand:#6ae3ff; --brand-2:#78ffa7; --ring:#2a3647;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background:linear-gradient(180deg,#0b0e13 0%,#0f1420 60%,#0b0e13 100%);
+      color:var(--text);
+    }
+    .container{max-width:1200px; margin:0 auto; padding:24px}
+    header{position:sticky; top:0; backdrop-filter:saturate(140%) blur(8px); background:rgba(11,14,19,.55); border-bottom:1px solid #1a2130; z-index:5}
+    nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:700}
+    .logo{width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand-2));box-shadow:0 6px 24px rgba(122,255,193,.25)}
+    .links a{color:var(--muted);text-decoration:none;margin-left:18px;font-weight:600}
+    .links a:hover{color:var(--text)}
+    .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;padding:40px 0 10px}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.00));border:1px solid #1b2433;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+    .hero .left{padding:28px}
+    .title{font-size:clamp(28px,4vw,44px);line-height:1.15;margin:0 0 10px}
+    .subtitle{color:var(--muted);margin:0 0 18px}
+    .badges{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}
+    .badge{border:1px solid #283143;background:#0f1420;padding:6px 10px;border-radius:10px;font-size:12px;color:#b8c3d6}
+    .cta{display:flex;gap:12px;margin-top:18px}
+    .btn{appearance:none;border:none;cursor:pointer;border-radius:12px;padding:12px 16px;font-weight:700}
+    .btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#071018}
+    .btn.ghost{background:transparent;border:1px solid #2a3649;color:var(--text)}
+    .right-card{padding:28px;overflow:hidden;position:relative;display:flex;flex-direction:column;gap:18px;justify-content:center}
+    .details-list{list-style:none;padding:0;margin:0 0 10px 0}
+    .details-list li{margin-bottom:10px;color:var(--muted);font-size:15px;}
+    .contact-row{margin-bottom:8px;}
+    .contact-row a{color:var(--brand);text-decoration:none;}
+    .contact-row a:hover{color:var(--brand-2)}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid #283143;color:#9fb1cc;font-weight:700;font-size:12px;margin:3px}
+    .section-title{font-size:22px;margin:0 0 10px;color:var(--brand)}
+    .about-blurb{color:#b5c6e0;font-size:18px;margin-bottom:16px;}
+    section{padding:34px 0}
+    h2{margin:0 0 16px;font-size:clamp(22px,3vw,28px)}
+    p.lead{color:var(--muted)}
+    .grid{display:grid;gap:16px}
+    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+    .grid.cols-2{grid-template-columns:repeat(2,1fr)}
+    @media (max-width:900px){.hero{grid-template-columns:1fr}.grid.cols-3{grid-template-columns:1fr 1fr}.grid.cols-2{grid-template-columns:1fr}}
+    @media (max-width:620px){.grid.cols-3{grid-template-columns:1fr}}
+    .tile{padding:18px}
+    .tile h3{margin:2px 0 8px;font-size:18px}
+    .muted{color:var(--muted)}
+    .price{font-size:22px;font-weight:800;background:linear-gradient(135deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+    ul.clean{list-style:none;padding:0;margin:10px 0 0}
+    ul.clean li{padding:4px 0;color:#c3cfde}
+    .portfolio .item{display:flex;flex-direction:column;gap:10px}
+    .thumb{height:150px;border-radius:14px;background:#0f1420;border:1px solid #1b2433;display:flex;align-items:center;justify-content:center;color:#7f92b1}
+    .footer-card{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px}
+    .sep{height:1px;background:#1b2433;margin:18px 0}
+    .note{font-size:12px;color:#7e8aa3}
+    .social-links a{color:var(--brand);text-decoration:none;margin-right:14px;font-weight:600}
+    .social-links a:hover{color:var(--brand-2)}
+    footer{padding:40px 0 60px;color:#8fa2bf;text-align:center;}
+    .about-section{display:grid;grid-template-columns:1fr 1fr;gap:32px;}
+    @media (max-width:900px){.about-section{grid-template-columns:1fr}}
+    .about-extra{color:#c2e6ff;font-size:17px;margin-bottom:10px;}
+    .about-quote{font-style:italic;color:#8fe4c1;font-size:18px;margin:12px 0;}
+    .studio-link{color:var(--brand);font-weight:600;}
+    .studio-link:hover{color:var(--brand-2);}
+    .listing-table{width:100%;border-collapse:collapse;margin:18px 0;}
+    .listing-table th, .listing-table td{border:1px solid #283143;padding:10px;font-size:15px;}
+    .listing-table th{background:#182334;color:var(--brand);text-align:left;}
+    .listing-table tr:nth-child(even){background:#141b25;}
+    .listing-table tr:nth-child(odd){background:#10141c;}
+    .listing-table td.price{color:#6ae3ff;font-weight:700;}
+    .listing-table td span.pages{color:#78ffa7;font-weight:600;}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="brand">
+          <div class="logo"></div>
+          <span>EnduhStudios</span>
+        </div>
+        <div class="links">
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#webdev">Web Dev</a>
+          <a href="#portfolio">Portfolio Deals</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- HERO SPLIT -->
+    <section class="hero">
+      <div class="left card">
+        <h1 class="title">Roblox & Web Developer, Builder, UI Designer & Manager</h1>
+        <p class="subtitle">
+          Creating expert Roblox systems, professional websites, clean UIs, immersive builds, and leading projects with strong communication and fair pricing.
+        </p>
+        <div class="badges">
+          <span class="badge">Indian Developer</span>
+          <span class="badge">Fluent English</span>
+          <span class="badge">3+ Years Experience (since age 10)</span>
+          <span class="badge">Polite & Patient</span>
+          <span class="badge">Excellent Communication</span>
+          <span class="badge">Project Management</span>
+          <span class="badge">Voice Calls Accepted</span>
+        </div>
+        <div class="cta">
+          <a class="btn primary" href="#contact">Hire Me</a>
+          <a class="btn ghost" href="#portfolio">See Portfolio Deals</a>
+        </div>
+      </div>
+      <div class="right-card card">
+        <div>
+          <div class="section-title">Profile & Payments</div>
+          <ul class="details-list">
+            <li><b>Name:</b> EnduhMan (Display) / @EnduhStudios (Roblox Username)</li>
+            <li><b>Studio:</b> <a class="studio-link" href="https://www.roblox.com/communities/35976852/Enduh-Studios#!/about" target="_blank">Enduh Studios (Roblox Studio)</a></li>
+            <li><b>Location:</b> India</li>
+            <li><b>Age:</b> 13</li>
+            <li><b>Experience:</b> 3+ years Roblox & web development</li>
+            <li><b>Languages:</b> English (fluent, spoken & written)</li>
+            <li><b>Communication:</b> Excellent, patient, voice calls accepted, project handling & client updates</li>
+            <li><b>Payment Types:</b> <span class="pill">Upfront (preferred)</span> <span class="pill">Upon Completion</span></li>
+            <li><b>Accepted Payments:</b> Robux (R$), USD, Customer's Local Currency (if possible)</li>
+            <li><b>Apps:</b> PayPal, CashApp, Google Pay, PhonePe, Cash</li>
+            <li><b>Free Work:</b> Only for personal experience/portfolio (not otherwise)</li>
+          </ul>
+          <div class="section-title">Contact</div>
+          <div class="contact-row"><b>Discord:</b> <span class="pill">@EnduhStudios</span> (Display: EnduhMan)</div>
+          <div class="contact-row"><b>Roblox:</b> <span class="pill">@EnduhStudios</span> (Display: EnduhMan)</div>
+          <div class="contact-row"><b>YouTube:</b> <a href="https://www.youtube.com/@EnduhMan" target="_blank">youtube.com/@EnduhMan</a></div>
+          <div class="contact-row"><b>Discord Server:</b> <a href="https://discord.gg/SSSS3x9r" target="_blank">discord.gg/SSSS3x9r</a></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <h2>About Me</h2>
+      <div class="about-section">
+        <div>
+          <div class="about-blurb">
+            I’m <b>EnduhMan</b> (display) / <b>@EnduhStudios</b> (Roblox username), a passionate <b>Indian developer</b> and founder of <a href="https://www.roblox.com/communities/35976852/Enduh-Studios#!/about" target="_blank" class="studio-link">Enduh Studios</a>. Since starting out at age 10, I’ve been captivated by the endless possibilities of scripting, building, and designing for Roblox and the web.<br><br>
+            My journey is fueled by genuine curiosity, a drive to master new skills, and a determination to deliver only my best work—whether it’s a full game system, a professional website, or a polished GUI.<br><br>
+            I believe in clear communication, patient collaboration, and always putting the client’s vision first. My work is more than just code—it’s about making ideas real, solving challenges, and building digital experiences people love.<br><br>
+            <span class="about-extra">
+              <b>Enduh Studios</b> is my creative hub for collaborative projects, larger builds, and group innovation. Check it out on Roblox: <a href="https://www.roblox.com/communities/35976852/Enduh-Studios#!/about" class="studio-link" target="_blank">@Enduh-Studios</a>
+            </span>
+          </div>
+        </div>
+        <div>
+          <div class="about-quote">
+            “I don’t just take commissions—I treat every project as a step toward mastery. Whether learning a new system or refining a UI, I’m dedicated, determined, and always hungry to grow. If you want a dev who truly cares about your project, you’ve found the right person.”
+          </div>
+          <div class="about-extra">
+            <b>My Passion:</b> <br>
+            - Bringing ideas to life through code, design, and teamwork.<br>
+            - Tackling even the trickiest bugs or features with patience and focus.<br>
+            - Expanding my skills in scripting, UI/UX, building, and web—every single day.<br>
+            - Building a reputation for trust, creativity, and reliability.<br>
+            - Helping clients and teams realize their vision—big or small.<br><br>
+            <b>Determination:</b><br>
+            If there’s something I don’t know yet, I’ll learn it fast. I love a challenge, and I never give up until it’s right.
+          </div>
+          <div class="about-extra">
+            <b>Why Choose Me?</b><br>
+            - I fill in every detail, leaving no gaps in your project.<br>
+            - I’m committed to delivering not just what’s asked, but what’s needed.<br>
+            - My goal is to exceed expectations—every single time.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS (detailed) -->
+    <section id="skills">
+      <h2>Skills</h2>
+      <div class="grid cols-2">
+        <div class="card tile">
+          <h3>Scripting</h3>
+          <ul class="clean">
+            <li>Expert Roblox scripting (Lua, ModuleScripts, OOP)</li>
+            <li>Leaderboard, stats, and progression systems</li>
+            <li>Efficient & secure datastores, saving/loading</li>
+            <li>Custom monetization (passes, devproducts, donation boards)</li>
+            <li>Advanced debugging & optimization</li>
+            <li>Signal-driven live UI integration</li>
+          </ul>
+        </div>
+        <div class="card tile">
+          <h3>Building & Modeling</h3>
+          <ul class="clean">
+            <li>Low-poly & high-poly environment design</li>
+            <li>Asset & prop modeling (Roblox Studio & Blender basics)</li>
+            <li>Efficient part usage for smooth gameplay</li>
+            <li>Lighting, atmosphere, and polish for immersive worlds</li>
+            <li>Map layout & optimization</li>
+          </ul>
+        </div>
+        <div class="card tile">
+          <h3>UI/UX Design</h3>
+          <ul class="clean">
+            <li>Modern, clean, and readable layouts</li>
+            <li>Responsive scaling for all devices</li>
+            <li>Custom UI systems (leaderboards, shops, notifications)</li>
+            <li>Smooth animations and transitions</li>
+            <li>Figma & Roblox Studio UI workflows</li>
+          </ul>
+        </div>
+        <div class="card tile">
+          <h3>Management & Communication</h3>
+          <ul class="clean">
+            <li>Project planning, scope, client updates</li>
+            <li>Team coordination and role assignment</li>
+            <li>Milestone & deadline tracking</li>
+            <li>Professional, polite, and clear communication</li>
+            <li>Documentation & version control (GitHub)</li>
+          </ul>
+        </div>
+        <div class="card tile">
+          <h3>Web Development</h3>
+          <ul class="clean">
+            <li>HTML, CSS, JavaScript (beginner–intermediate)</li>
+            <li>Responsive, modern portfolio sites</li>
+            <li>Landing pages, showcase pages, client portals</li>
+            <li>Basic React, Tailwind, and static site generators</li>
+            <li>Simple backend & hosting setup (Netlify/GitHub Pages)</li>
+          </ul>
+        </div>
+        <div class="card tile">
+          <h3>Other Strengths</h3>
+          <ul class="clean">
+            <li>Fluent English: voice & text</li>
+            <li>Polite & patient with all clients</li>
+            <li>Quick learner & problem solver</li>
+            <li>Portfolio expansion: always open to new challenges</li>
+            <li>Voice calls accepted, regular progress updates</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING: ROBLOX -->
+    <section id="pricing">
+      <h2>Roblox Pricing</h2>
+      <p class="lead">Transparent, fair Robux pricing. Final quotes depend on complexity. For micro-tasks, see below:</p>
+      <div class="grid cols-3">
+        <div class="card tile">
+          <h3>Micro / Bug Fixes</h3>
+          <div class="price">30 – 100 R$</div>
+          <ul class="clean">
+            <li>Quick bug fixes</li>
+            <li>Very small developing tasks</li>
+            <li>Minor script/GUI tweaks</li>
+          </ul>
+        </div>
+        <div class="card tile">
+          <h3>Small Work</h3>
+          <div class="price">150 – 450 R$</div>
+          <ul class="clean">
+            <li>Minor UI/build edits</li>
+            <li>Small scripting features</li>
+            <li>Basic systems (e.g. basic leaderboard, shop, teleport)</li>
+          </ul>
+        </div>
+        <div class="card tile">
+          <h3>Medium Systems</h3>
+          <div class="price">500 – 1,200 R$</div>
+          <ul class="clean">
+            <li>Custom UIs, saving systems</li>
+            <li>Datastore or currency frameworks</li>
+            <li>Environment builds, full GUIs</li>
+          </ul>
+        </div>
+        <div class="card tile">
+          <h3>Full Packages</h3>
+          <div class="price">1,500 R$+</div>
+          <ul class="clean">
+            <li>Complete systems (tycoon, simulator, obby, etc.)</li>
+            <li>All-in-one: scripting, UI, builds, management</li>
+            <li>Full project delivery & support</li>
+          </ul>
+        </div>
+      </div>
+      <div class="sep"></div>
+      <div class="note">Payment accepted in <b>Robux (R$)</b>, <b>USD</b>, or <b>Customer's Local Currency</b> (where possible). PayPal, CashApp, GooglePay, PhonePe, Cash supported. Upfront preferred, can accept upon completion for trusted clients. No free work except for personal portfolio expansion.</div>
+    </section>
+
+    <!-- WEB DEVELOPMENT -->
+    <section id="webdev">
+      <h2>Web Development Pricing</h2>
+      <p class="lead">Professional websites for individuals, groups, and studios. Pricing in USD.</p>
+      <div class="grid cols-3">
+        <div class="card tile">
+          <h3>Basic Sites</h3>
+          <div class="price">$20 – $40</div>
+          <ul class="clean">
+            <li>1-page static portfolio</li>
+            <li>Basic landing page</li>
+            <li>Fast turnaround</li>
+          </ul>
+        </div>
+        <div class="card tile">
+          <h3>Intermediate</h3>
+          <div class="price">$50 – $80</div>
+          <ul class="clean">
+            <li>Multi-page websites</li>
+            <li>Responsive layouts</li>
+            <li>Custom design & branding</li>
+          </ul>
+        </div>
+        <div class="card tile">
+          <h3>Advanced</h3>
+          <div class="price">$100+</div>
+          <ul class="clean">
+            <li>Dynamic features (e.g. contact forms, galleries)</li>
+            <li>Custom code & integration</li>
+            <li>Ongoing support & updates</li>
+          </ul>
+        </div>
+      </div>
+      <div class="sep"></div>
+      <div class="note">Websites are delivered with modern, clean code and responsive design. Hosting help available if needed (Netlify, GitHub Pages, etc).</div>
+    </section>
+
+    <!-- PORTFOLIO DEALS -->
+    <section id="portfolio">
+      <h2>Portfolio Website Deals</h2>
+      <p class="lead">Want a stunning personal or group portfolio site? I offer custom-built portfolios based on your needs—just send your details and I'll handle the rest!</p>
+      <table class="listing-table">
+        <tr>
+          <th>Package</th>
+          <th>Details</th>
+          <th>Pages/Length</th>
+          <th>Price</th>
+        </tr>
+        <tr>
+          <td><b>Starter Portfolio</b></td>
+          <td>
+            Simple, modern 1-page site<br>
+            Responsive, editable, with your info & socials<br>
+            Color/style customization<br>
+            Fastest delivery
+          </td>
+          <td><span class="pages">1 page</span></td>
+          <td class="price">200–350 R$<br>($20–$30)</td>
+        </tr>
+        <tr>
+          <td><b>Pro Portfolio</b></td>
+          <td>
+            Multi-section site:<br>
+            About, Skills, Pricing, Projects, Contact<br>
+            Detailed layout, custom sections, more visuals<br>
+            Up to 4 pages or long-form 1-pager
+          </td>
+          <td><span class="pages">~4 pages</span></td>
+          <td class="price">500–750 R$<br>($40–$60)</td>
+        </tr>
+        <tr>
+          <td><b>Elite Portfolio</b></td>
+          <td>
+            Full website:<br>
+            Unlimited sections/pages<br>
+            Blog, gallery, project showcases<br>
+            Interactive features (JS), advanced branding<br>
+            Designed for serious devs, groups, or studios<br>
+            Ongoing update support
+          </td>
+          <td><span class="pages">5+ pages / unlimited</span></td>
+          <td class="price">1,000 R$+<br>($75+)</td>
+        </tr>
+      </table>
+      <div class="about-extra">
+        <b>How it works:</b><br>
+        1. You list your details, vision, and style.<br>
+        2. I suggest a layout + send a first draft.<br>
+        3. You give feedback until it's perfect.<br>
+        4. Final site delivered as HTML, ready to host anywhere.<br>
+        <span style="color:#b8ffd6;"><b>Show off your work, attract clients, and get noticed!<br>DM me for a quote or to see more samples.</b></span>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <h2>Contact & Socials</h2>
+      <div class="card footer-card" style="flex-direction:column;align-items:flex-start;">
+        <div style="margin-bottom:12px;">
+          <p class="lead" style="margin:0 0 6px">Open for commissions & collaborations</p>
+          <div class="muted">
+            <b>DM for scope, pricing, and turnaround estimates.</b><br>
+            Preferred payment: <span class="pill">Upfront</span> (can accept upon completion for trusted clients).<br>
+            <b>No free work except for portfolio expansion.</b>
+          </div>
+        </div>
+        <div>
+          <div class="contact-row"><b>Discord:</b> <span class="pill">@EnduhStudios</span> (Display: EnduhMan)</div>
+          <div class="contact-row"><b>Roblox:</b> <span class="pill">@EnduhStudios</span> (Display: EnduhMan)</div>
+          <div class="contact-row"><b>YouTube:</b> <a href="https://www.youtube.com/@EnduhMan" target="_blank">youtube.com/@EnduhMan</a></div>
+          <div class="contact-row"><b>Discord Server:</b> <a href="https://discord.gg/SSSS3x9r" target="_blank">discord.gg/SSSS3x9r</a></div>
+          <div class="contact-row"><b>Roblox Studio:</b> <a href="https://www.roblox.com/communities/35976852/Enduh-Studios#!/about" class="studio-link" target="_blank">Enduh Studios</a></div>
+        </div>
+        <div class="social-links" style="margin-top:18px;">
+          <a href="https://www.youtube.com/@EnduhMan" target="_blank">YouTube</a>
+          <a href="https://discord.gg/SSSS3x9r" target="_blank">Discord Server</a>
+          <a href="https://www.roblox.com/communities/35976852/Enduh-Studios#!/about" target="_blank">Roblox Studio</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="muted">© <span id="year"></span> EnduhStudios — Roblox & Web Dev Portfolio. All rights reserved.</div>
+    </footer>
+  </main>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
